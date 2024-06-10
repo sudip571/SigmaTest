@@ -1,8 +1,9 @@
-﻿using CandidateHub.Database;
+﻿
+using CandidateHub.Database;
 using FluentValidation;
-using MediatR;
-using Sigma.Shared.Responses;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using CandidateHub.Repositories;
+using CandidateHub.Constants;
+using static CandidateHub.Events.CandidateHubLog;
 
 namespace CandidateHub.Features.Candidates.Commands;
 
@@ -12,6 +13,46 @@ public static class CreateAndUpdateCandidate
     public sealed record Command(CandidateDto candidate) : IRequest<Response<string>>;
 
     #endregion Command
+
+    #region Handlers
+
+    internal sealed class Handler : IRequestHandler<Command,Response<string>>
+    {
+        private readonly ILogger logger;
+        private readonly IMediator mediator;    
+        private readonly ICandidateHubRepository candidateHubRepository;
+
+
+        public Handler(ILogger logger,
+            IMediator mediator,
+            ICandidateHubRepository candidateHubRepository)
+        {
+            this.logger = logger;
+            this.mediator = mediator;
+            this.candidateHubRepository = candidateHubRepository;
+        }
+
+        public async Task<Response<string>> Handle(Command request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var responseMessage = await candidateHubRepository.AddOrUpdateCandidate(request.candidate.ToCandidate(), cancellationToken);
+
+                await mediator.Publish(new CandidateHubLogNotification(responseMessage),cancellationToken);
+
+                return new Response<string>()
+                    .OKResponse(responseMessage);                  
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(AppConstant.General_Error_Message_Format, ex.Message);
+                throw;
+            }
+        }        
+    }
+
+    #endregion Handlers
 
     #region Validation
     public class CommandValidator : AbstractValidator<Command>
@@ -92,26 +133,27 @@ public static class CreateAndUpdateCandidate
 
         public string Comment { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
-        public string TimeInterval { get; set; }
+        public string? TimeInterval { get; set; }
 
-        public string Linkedin { get; set; }
+        public string? Linkedin { get; set; }
 
-        public string GitHub { get; set; }
+        public string? GitHub { get; set; }
 
         public Candidate ToCandidate()
         {
             return new Candidate
             {
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email,
-                Comment = Comment,
+                FirstName = FirstName.Trim(),
+                LastName = LastName.Trim(),
+                Email = Email.Trim(),
+                Comment = Comment.Trim(),
                 PhoneNumber = PhoneNumber,
                 TimeInterval = TimeInterval,
                 Linkedin = Linkedin,
-                GitHub = GitHub
+                GitHub = GitHub,
+                ExposeId = Guid.NewGuid().ToString()
             };
         }
     }

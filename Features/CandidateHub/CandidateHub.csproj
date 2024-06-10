@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
     <Folder Include="Database\Context\" />
-    <Folder Include="Events\" />
     <Folder Include="Features\Candidates\Query\" />
   </ItemGroup>
 

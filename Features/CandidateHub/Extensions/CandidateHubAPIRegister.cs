@@ -14,8 +14,6 @@ public static class CandidateHubAPIRegister
     {
         host.AddSerilogs();
 
-        //services.AddStronglyTypedConfig(configuration);
-
         if (assembly is null)
             assembly = Assembly.GetExecutingAssembly();
         services.AddCommonServiceTogether(configuration, assembly);

@@ -6,3 +6,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using Sigma.Shared.Controllers;
 global using Swashbuckle.AspNetCore.Annotations;
 global using Sigma.Shared.Responses;
+global using ILogger = Serilog.ILogger;
