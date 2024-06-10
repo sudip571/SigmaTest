@@ -33,9 +33,9 @@ public class CandidateHubRepository : ICandidateHubRepository
         }
         else
         {
-            await sigmaContext.Candidate.AddAsync(candidate);
+            await sigmaContext.Candidate.AddAsync(candidate, cancellationToken);
         }
-        await sigmaContext.SaveChangesAsync();
+        await sigmaContext.SaveChangesAsync(cancellationToken);
         return response;
     }
 
