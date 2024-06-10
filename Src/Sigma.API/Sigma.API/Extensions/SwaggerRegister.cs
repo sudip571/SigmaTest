@@ -1,5 +1,6 @@
 ﻿using Sigma.Shared.Extensions.ServiceExtensions;
 using System.Reflection;
+using CandidateHub.Extensions;
 
 namespace Sigma.API.Extensions;
 
@@ -11,9 +12,8 @@ public static class SwaggerRegister
         services.AddSwaggerGen(c =>
         {           
             c.AddSwaggerGenerator(configuration);
+            c.AddCandidateHubSwaggerDoc();
 
-            //c.AddAppleBusinessSwaggerDoc(); //Apple Business API
-           
             var xmlFile = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             c.IncludeXmlComments(xmlPath);

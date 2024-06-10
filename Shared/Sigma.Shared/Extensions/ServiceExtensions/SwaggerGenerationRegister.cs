@@ -4,8 +4,7 @@ namespace Sigma.Shared.Extensions.ServiceExtensions;
 
 
 public static class SwaggerGenerationRegister
-{
-    
+{   
 
     public static SwaggerGenOptions AddSwaggerGenerator(this SwaggerGenOptions options, IConfiguration configuration)
     {        

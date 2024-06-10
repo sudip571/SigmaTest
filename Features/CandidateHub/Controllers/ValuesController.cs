@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using CandidateHub.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Sigma.Shared.Controllers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CandidateHub.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    [ApiExplorerSettings(GroupName = SwaggerHelper.V1.CandidateHubAPIGroup)]
+    public class ValuesController : BaseApiController
     {
         // GET: api/<ValuesController>
         [HttpGet]
