@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandidateHub", "..\..\Featu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigma.Shared", "..\..\Shared\Sigma.Shared\Sigma.Shared.csproj", "{DD1BF199-D892-41D9-A626-27F774E85DF9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{FE998C07-30BD-4AB1-8AF8-3841506F6248}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateHub.UnitTest", "..\..\UnitTest\CandidateHub.UnitTest\CandidateHub.UnitTest.csproj", "{597DC19F-0EEE-479C-A33F-E36F255EAA0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{DD1BF199-D892-41D9-A626-27F774E85DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD1BF199-D892-41D9-A626-27F774E85DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD1BF199-D892-41D9-A626-27F774E85DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597DC19F-0EEE-479C-A33F-E36F255EAA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597DC19F-0EEE-479C-A33F-E36F255EAA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597DC19F-0EEE-479C-A33F-E36F255EAA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597DC19F-0EEE-479C-A33F-E36F255EAA0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{C058C0A4-6E4E-4866-AC39-BFFAE2C9D237} = {C304BC82-EDEF-4C0C-B1C4-147EBAB7E87E}
 		{417B92CF-3C33-47FF-8753-8516AC0D7923} = {2622AD86-14B5-42E0-A969-42B38794D7CF}
 		{DD1BF199-D892-41D9-A626-27F774E85DF9} = {14861D06-C345-4086-81B9-01E957E9B246}
+		{597DC19F-0EEE-479C-A33F-E36F255EAA0C} = {FE998C07-30BD-4AB1-8AF8-3841506F6248}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D353117B-7915-4A95-A609-80AEC7C8EDCF}

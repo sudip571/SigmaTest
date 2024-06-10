@@ -16,7 +16,7 @@ public static class CreateAndUpdateCandidate
 
     #region Handlers
 
-    internal sealed class Handler : IRequestHandler<Command,Response<string>>
+    public sealed class Handler : IRequestHandler<Command,Response<string>>
     {
         private readonly ILogger logger;
         private readonly IMediator mediator;    
