@@ -33,7 +33,7 @@ public class ExceptionHandlerMiddleware
             var response = context.Response;
             response.ContentType = "application/json";
 
-            var responseModel = new ResponseV2<string>(); // Use ResponseV2<T> here
+            var responseModel = new Response<string>(); 
             responseModel.Errors = new 
             {
                 Message = error?.Message,

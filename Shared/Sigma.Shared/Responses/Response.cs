@@ -8,7 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Sigma.Shared.Responses;
 
-public class ResponseV2<T>
+public class Response<T>
 {
     public bool Success
     {
@@ -23,14 +23,14 @@ public class ResponseV2<T>
 #region Response Extension Methods
 public static class ResponseExtension
 {
-    public static ResponseV2<T> OKResponse<T>(this ResponseV2<T> response, string message = "")
+    public static Response<T> OKResponse<T>(this Response<T> response, string message = "")
     {
         response.StatusCode = (int)HttpStatusCode.OK;
         response.Message = message;
 
         return response;
     }
-    public static ResponseV2<T> OKResponse<T>(this ResponseV2<T> response, T data, string message = "")
+    public static Response<T> OKResponse<T>(this Response<T> response, T data, string message = "")
     {
         response.StatusCode = (int)HttpStatusCode.OK;
         response.Message = message;
@@ -39,7 +39,7 @@ public static class ResponseExtension
         return response;
     }
     
-    public static ResponseV2<T> ErrorResponse<T>(this ResponseV2<T> response, Exception ex)
+    public static Response<T> ErrorResponse<T>(this Response<T> response, Exception ex)
     {
         response.StatusCode = (int)HttpStatusCode.InternalServerError;
         response.Message = "Error occured while processing the request.";
@@ -50,7 +50,7 @@ public static class ResponseExtension
         };
         return response;
     }
-    public static ResponseV2<T> ResultNotFoundResponse<T>(this ResponseV2<T> response)
+    public static Response<T> ResultNotFoundResponse<T>(this Response<T> response)
     {
         response.StatusCode = (int)HttpStatusCode.NotFound;
         response.Message = "Data is not available";
