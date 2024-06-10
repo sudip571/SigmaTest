@@ -46,6 +46,7 @@ public class ExceptionHandlerMiddleware
                 case ValidationFailedException ex:
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     responseModel.StatusCode = (int)HttpStatusCode.BadRequest;
+                    responseModel.Message = ex.Message;
                     responseModel.Errors = ex.ErrorsDictionary;
                     break;
 

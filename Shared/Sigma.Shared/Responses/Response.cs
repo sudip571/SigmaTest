@@ -12,7 +12,7 @@ public class Response<T>
 {
     public bool Success
     {
-        get { return Errors is not null; }
+        get { return Errors is  null; }
     }
     public string Message { get; set; }
     public object? Errors { get; set; }

@@ -26,4 +26,6 @@ public partial class Candidate
     public string Linkedin { get; set; }
 
     public string GitHub { get; set; }
+
+    public bool IsDeleted { get; set; }
 }

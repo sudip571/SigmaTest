@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using CandidateHub.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Sigma.Shared.Constants;
 using Sigma.Shared.Extensions.ServiceExtensions;
@@ -18,27 +19,26 @@ public static class CandidateHubAPIRegister
         if (assembly is null)
             assembly = Assembly.GetExecutingAssembly();
         services.AddCommonServiceTogether(configuration, assembly);
+        
+        services.AddDbContext<SigmaContext>(options =>
+        {
+            options.UseSqlServer(configuration.GetConnectionString(AppConstants.Sigma_Connection_String_MS),
+            providerOption =>
+            {
+                providerOption.CommandTimeout(300);
+            });
 
-        //Register DbContext  for FlightDeck Database      
-        //services.AddDbContext<AppleContextFD>(options =>
-        //{
-        //    options.UseSqlServer(configuration.GetConnectionString(AppConstants.Sigma_Connection_String_MS),
-        //    providerOption =>
-        //    {
-        //        providerOption.CommandTimeout(300);
-        //    });
-
-        //    if (configuration.GetValue<bool>("LinqQueryLog:EnableLoggingOnDevelopment"))
-        //    {
-        //        options.EnableSensitiveDataLogging();
-        //        options.AddInterceptors(new SlowQueryDetectionHelper());
-        //    }
-        //    if (configuration.GetValue<bool>("LinqQueryLog:EnableLoggingOnProduction"))
-        //    {
-        //        options.EnableSensitiveDataLogging();
-        //        options.AddInterceptors(new SlowQueryDetectionHelper());
-        //    }
-        //});
+            if (configuration.GetValue<bool>("LinqQueryLog:EnableLoggingOnDevelopment"))
+            {
+                options.EnableSensitiveDataLogging();
+                options.AddInterceptors(new SlowQueryDetectionHelper());
+            }
+            if (configuration.GetValue<bool>("LinqQueryLog:EnableLoggingOnProduction"))
+            {
+                options.EnableSensitiveDataLogging();
+                options.AddInterceptors(new SlowQueryDetectionHelper());
+            }
+        });
 
         return services;
 
